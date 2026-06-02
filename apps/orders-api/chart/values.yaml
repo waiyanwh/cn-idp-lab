@@ -1,0 +1,19 @@
+replicaCount: 2
+
+image:
+  repository: registry.kube-system.svc.cluster.local:5001/idp/orders-api
+  tag: "0.1.0"
+  pullPolicy: IfNotPresent
+
+service:
+  port: 8080
+
+secretProvider:
+  enabled: true
+  vaultAddress: http://vault.vault.svc:8200
+  roleName: orders-api
+  secretPath: secret/data/orders-api
+  secretKey: message
+
+serviceMonitor:
+  enabled: true

@@ -1,0 +1,9 @@
+apiVersion: security.istio.io/v1
+kind: PeerAuthentication
+metadata:
+  name: apps-permissive
+  namespace: apps
+spec:
+  mtls:
+    mode: PERMISSIVE
+

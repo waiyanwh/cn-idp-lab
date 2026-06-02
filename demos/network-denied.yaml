@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: blocked-client
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: blocked-client
+  namespace: blocked-client
+spec:
+  restartPolicy: Never
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 100
+    runAsGroup: 65533
+    seccompProfile:
+      type: RuntimeDefault
+  containers:
+    - name: check
+      image: registry.kube-system.svc.cluster.local:5001/idp/catalog-api:0.1.0
+      command:
+        - python
+        - -c
+        - |
+          import sys
+          import urllib.request
+
+          try:
+              urllib.request.urlopen("http://catalog-api.apps.svc.cluster.local:8080/readyz", timeout=5)
+          except Exception as exc:
+              print(f"blocked as expected: {exc}")
+              sys.exit(0)
+
+          print("unexpectedly reached catalog-api from blocked-client")
+          sys.exit(1)
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+        readOnlyRootFilesystem: true
