@@ -1,5 +1,7 @@
 # Cloud Native Internal Developer Platform Lab
 
+![Cloud Native IDP Lab](docs/assets/cn-idp-lab-banner.png)
+
 This repository turns the CNCF blog post [Building a Cloud Native Internal Developer Platform with Kubernetes, GitOps and Supply Chain Security](https://www.cncf.io/blog/2026/05/29/building-a-cloud-native-internal-developer-platform-with-kubernetes-gitops-and-supply-chain-security/) into a local, hands-on lab.
 
 You will build a complete internal developer platform on a kind Kubernetes cluster using Docker, Gitea, Argo CD, Helm, Istio, Kyverno, Cosign, Trivy, KubeSec, Prometheus, Grafana, Loki, Promtail, Falco, Vault, and Secrets Store CSI.
@@ -662,17 +664,3 @@ Review the prompt before confirming Docker cleanup because it may remove images 
 - The local registry is intentionally insecure because it is bound to localhost for this lab.
 - The Terraform directory is a local IaC reference; the active cluster path uses `infra/kind/cluster.yaml`.
 - This setup demonstrates platform concepts. It is not a production deployment template.
-
-## Optional GitHub Banner Image
-
-Place the generated repository image at:
-
-```text
-docs/assets/cn-idp-lab-banner.png
-```
-
-Then add this near the top of the README:
-
-```md
-![Cloud Native IDP Lab](docs/assets/cn-idp-lab-banner.png)
-```
